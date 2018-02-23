@@ -24,6 +24,25 @@ namespace eight_puzzle
             _board = Enumerable.Range(0, tileCount).OrderBy(_ => rng.Next()).ToArray();
         }
 
+        internal void Move(int move)
+        {
+            if (!IsLegalMove(move))
+            {
+                throw new ApplicationException("Illegal move!");
+            }
+            int zeroIdx = GetEmptySquare();
+            // could eliminate temp and use 0 literal, 
+            // but this leaves flexibility of setting "empty" to something else
+            int temp = _board[zeroIdx];
+            _board[zeroIdx] = _board[move];
+            _board[move] = temp;
+        }
+
+        private bool IsLegalMove(int move)
+        {
+            return GetLegalMoves().Contains(move);
+        }
+
         internal void Print()
         {
             for (int i = 0; i < _board.Length; i++)

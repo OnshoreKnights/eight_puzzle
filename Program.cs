@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace eight_puzzle
 {
@@ -6,7 +8,14 @@ namespace eight_puzzle
     {
         static void Main(string[] args)
         {
-            new Board().Print();
+            var board = new Board();
+            board.Print();
+            var rng = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                board.Move(board.GetLegalMoves().OrderBy(_ => rng.Next()).First());
+                board.Print();
+            }
             Console.ReadKey();
         }
     }
