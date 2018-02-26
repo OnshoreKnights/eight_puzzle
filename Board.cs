@@ -8,6 +8,7 @@ namespace eight_puzzle
     {
         private int[] _board;
         private int _width;
+        internal int moves;
 
         internal Board(int tileCount = 9)
         {
@@ -30,12 +31,30 @@ namespace eight_puzzle
             {
                 throw new ApplicationException("Illegal move!");
             }
+            moves++;
             int zeroIdx = GetEmptySquare();
             // could eliminate temp and use 0 literal, 
             // but this leaves flexibility of setting "empty" to something else
             int temp = _board[zeroIdx];
             _board[zeroIdx] = _board[move];
             _board[move] = temp;
+        }
+
+        internal bool IsSolved()
+        {
+            int last = -1;
+            foreach (int tile in _board)
+            {
+                if (tile != 0)
+                {
+                    if (tile < last)
+                    {
+                        return false;
+                    }
+                    last = tile;
+                }
+            }
+            return true;
         }
 
         private bool IsLegalMove(int move)
