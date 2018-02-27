@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace eight_puzzle
 {
-    class SimpleAgent : IAgent
+    public class SimpleAgent : IAgent
     {
         Random rng = new Random();
         public int GetMove(Board board)
