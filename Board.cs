@@ -6,7 +6,7 @@ namespace eight_puzzle
 {
     public class Board
     {
-        public int[] _board;
+        private int[] _board;
         private int _width;
         internal int moves;
         private int hCache = -1;
